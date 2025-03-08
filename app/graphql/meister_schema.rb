@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-class MeisterSchema < GraphQL::Schema # rubocop:disable GraphQL/MaxComplexitySchema
+class MeisterSchema < GraphQL::Schema
   mutation(Types::MutationType)
   query(Types::QueryType)
 

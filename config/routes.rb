@@ -14,6 +14,7 @@ Rails.application.routes.draw do
     mount GraphiQL::Rails::Engine, at: "/graphiql", graphql_path: "/graphql"
   end
 
-  # Defines the root path route ("/")
-  # root "posts#index"
+  resources :projects, only: [ :index, :show ]
+
+  root "projects#index"
 end

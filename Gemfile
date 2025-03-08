@@ -7,6 +7,7 @@ gem "puma", ">= 5.0"
 gem "importmap-rails"
 gem "turbo-rails"
 gem "stimulus-rails"
+gem "tailwindcss-rails"
 
 gem "solid_cache"
 gem "solid_queue"
@@ -18,6 +19,9 @@ group :development, :test do
   gem "debug", platforms: %i[ mri windows ], require: "debug/prelude"
   gem "rubocop-rails-omakase", require: false
   gem "rubocop-graphql", require: false
+
+  gem "erb_lint"
+  gem "htmlbeautifier"
 end
 
 group :development do
