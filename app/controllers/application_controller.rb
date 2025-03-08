@@ -8,8 +8,13 @@ class ApplicationController < ActionController::Base
 
   private
 
+  def current_display_mode
+    params[:display_mode] || cookies[:display_mode] || "grid"
+  end
+  helper_method :current_display_mode
+
   def set_display_mode
-    display_mode = params[:display_mode] || cookies[:display_mode] || "grid"
+    display_mode = current_display_mode
 
     cookies[:display_mode] = if VALID_DISPLAY_MODES.include?(display_mode)
       display_mode
