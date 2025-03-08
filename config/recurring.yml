@@ -2,7 +2,7 @@ development:
   task_seeder:
     class: TaskSeederJob
     queue: default
-    schedule: every 10 seconds
+    schedule: every 2 minutes
 
 production:
   task_seeder:
