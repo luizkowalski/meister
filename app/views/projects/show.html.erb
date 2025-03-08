@@ -19,7 +19,7 @@
 
       <div class="border-t border-gray-200 pt-4">
         <h3 class="text-lg font-medium text-gray-800 mb-4">Tasks</h3>
-        <div class="grid grid-cols-5 gap-4">
+        <div class="<%= class_names("space-y-4" => display_list?, "grid grid-cols-5 gap-4" => display_grid?) %>">
           <% @project.tasks.order(created_at: :desc).each do |task| %>
             <div class="bg-white border border-gray-200 rounded-lg shadow-sm hover:shadow-md transition-shadow duration-300">
               <div class="p-4">
