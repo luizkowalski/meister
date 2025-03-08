@@ -2,9 +2,10 @@
   toggle_mode = current_display_mode == 'grid' ? 'list' : 'grid'
   toggle_url = request.path + "?" + request.query_parameters.merge(display_mode: toggle_mode).to_param
 %>
+
 <div class="w-full">
   <div class="flex justify-end mb-4">
-    <%= link_to toggle_url, class: "px-3 py-2 bg-blue-500 text-white rounded hover:bg-blue-600 transition-colors duration-200 flex items-center" do %>
+    <%= link_to toggle_url, class: "px-3 py-2 bg-blue-500 text-white rounded hover:bg-blue-600 transition-colors duration-200 flex items-center", data: { turbo: false } do %>
       <% if current_display_mode == 'grid' %>
         <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
           <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
