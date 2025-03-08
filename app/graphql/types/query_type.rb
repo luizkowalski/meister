@@ -10,14 +10,12 @@ module Types
       argument :ids, [ ID ], required: true, description: "IDs of the objects."
     end
 
-
-    # Add root-level fields here.
-    # They will be entry points for queries on your schema.
-
-    # TODO: remove me
-    field :test_field, String, null: false,
-      description: "An example field added by the generator"
-
+    # Add projects query
+    field :projects, [ Types::ProjectType ], null: false,
+      description: "Returns a list of projects with their tasks" do
+        argument :limit, Integer, required: false, default_value: 20,
+          description: "Maximum number of projects to return"
+    end
 
     def node(id:)
       context.schema.object_from_id(id, context)
@@ -26,8 +24,9 @@ module Types
     def nodes(ids:)
       ids.map { |id| context.schema.object_from_id(id, context) }
     end
-    def test_field
-      "Hello World!"
+
+    def projects(limit:)
+      Project.includes(:tasks).limit(limit)
     end
   end
 end

@@ -1,7 +1,7 @@
 # Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
-one:
-  name: MyString
+new_york:
+  name: New York
 
-two:
-  name: MyString
+london:
+  name: London

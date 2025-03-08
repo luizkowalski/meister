@@ -1,11 +1,17 @@
 # frozen_string_literal: true
 
-class MeisterSchema < GraphQL::Schema
+class MeisterSchema < GraphQL::Schema # rubocop:disable GraphQL/MaxComplexitySchema
   mutation(Types::MutationType)
   query(Types::QueryType)
 
-  max_complexity 10
-  max_depth 10
+  max_complexity(5000)
+  max_depth(5000)
+
+  # Limit the size of incoming queries:
+  max_query_string_tokens(5000)
+
+  # Stop validating when it encounters this many errors:
+  validate_max_errors(100)
 
   # For batch-loading (see https://graphql-ruby.org/dataloader/overview.html)
   use GraphQL::Dataloader
@@ -26,11 +32,6 @@ class MeisterSchema < GraphQL::Schema
     raise(GraphQL::RequiredImplementationMissingError)
   end
 
-  # Limit the size of incoming queries:
-  max_query_string_tokens(5000)
-
-  # Stop validating when it encounters this many errors:
-  validate_max_errors(100)
 
   # Relay-style Object Identification:
 
