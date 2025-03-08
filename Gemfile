@@ -12,13 +12,15 @@ gem "solid_cache"
 gem "solid_queue"
 gem "solid_cable"
 
-gem "kamal", require: false
+gem "graphql"
 
 group :development, :test do
   gem "debug", platforms: %i[ mri windows ], require: "debug/prelude"
   gem "rubocop-rails-omakase", require: false
+  gem "rubocop-graphql", require: false
 end
 
 group :development do
   gem "web-console"
 end
+gem "graphiql-rails", group: :development
