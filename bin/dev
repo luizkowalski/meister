@@ -1,0 +1,7 @@
+#!/usr/bin/env bash
+
+echo "Checking for Foreman and installing if needed..."
+gem install foreman
+
+echo "Starting Rails server..."
+foreman start -f Procfile.dev

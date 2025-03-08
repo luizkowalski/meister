@@ -1,0 +1,58 @@
+# MySQL. Versions 5.5.8 and up are supported.
+#
+# Install the MySQL driver
+#   gem install mysql2
+#
+# Ensure the MySQL gem is defined in your Gemfile
+#   gem "mysql2"
+#
+# And be sure to use new-style password hashing:
+#   https://dev.mysql.com/doc/refman/5.7/en/password-hashing.html
+#
+default: &default
+  adapter: mysql2
+  encoding: utf8mb4
+  pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
+  username: root
+  password:
+  host: <%= ENV.fetch("DB_HOST") { "127.0.0.1" } %>
+
+development:
+  primary:
+    <<: *default
+    database: meistertest_development
+  cache:
+    <<: *default
+    database: meistertest_development_cache
+    migrations_paths: db/cache_migrate
+  queue:
+    <<: *default
+    database: meistertest_development_queue
+    migrations_paths: db/queue_migrate
+  cable:
+    <<: *default
+    database: meistertest_development_cable
+    migrations_paths: db/cable_migrate
+
+test:
+  <<: *default
+  database: meistertest_test
+
+production:
+  primary: &primary_production
+    <<: *default
+    database: meistertest_production
+    username: meister
+    password: <%= ENV["MEISTERTEST_DATABASE_PASSWORD"] %>
+  cache:
+    <<: *primary_production
+    database: meistertest_production_cache
+    migrations_paths: db/cache_migrate
+  queue:
+    <<: *primary_production
+    database: meistertest_production_queue
+    migrations_paths: db/queue_migrate
+  cable:
+    <<: *primary_production
+    database: meistertest_production_cable
+    migrations_paths: db/cable_migrate
