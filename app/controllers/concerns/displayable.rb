@@ -14,6 +14,7 @@ module Displayable
   DEFAULT_DISPLAY_MODE = "grid"
 
   private
+
   def set_display_mode
     cookies[:display_mode] = if VALID_DISPLAY_MODES.include?(current_display_mode)
       current_display_mode
