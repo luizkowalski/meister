@@ -1,0 +1,13 @@
+mutation CreateTask($projectId: ID!) {
+  createTask(input: { projectId: $projectId }) {
+    task {
+      id
+      name
+      project {
+        id
+        name
+      }
+    }
+    errors
+  }
+}
