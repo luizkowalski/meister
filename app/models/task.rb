@@ -6,6 +6,6 @@ class Task < ApplicationRecord
   private
 
   def broadcast_task
-    broadcast_refresh_to project
+    broadcast_prepend_to project, target: "tasks--container", partial: "tasks/task", locals: { task: self }
   end
 end
