@@ -60,3 +60,4 @@ mutation CreateTask {
 * I've stick to Rails' defaults, specially the Solid stack so that it is easier to test, no extra dependencies like Redis are required to run, just MySQL.
 * Using `broadcast_refresh_to` to update the page when a task is created has benefits and drawbacks: from a developer experience perspective, it's great because the UI is updated in real time and Turbo uses morphing to update just the necessary parts of the page but forcing a refresh every time a task is created might be a performance issue. But again, if the page refresh is a problem, then your app is too big and probably doing a lot of money at that point.
 * The grid/list switch could probably be implemented using pure JS but I think doing it with Rails' is much easier (and also Just Works™).
+* **Updated:** I gave it a try and am toggling the display mode using javascript. I don't particularly like it but I think it's good enough for this.

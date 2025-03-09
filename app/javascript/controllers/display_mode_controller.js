@@ -2,19 +2,21 @@ import { Controller } from "@hotwired/stimulus"
 import Cookies from "js-cookie"
 
 export default class extends Controller {
-  static targets = ["container"]
+  static targets = ["container", "listIcon", "gridIcon", "toggleDisplayText"]
   static values = {
-    mode: { type: String, default: "grid" }
+    mode: { type: String, default: "grid" },
+    listClasses: { type: Array, default: ["space-y-4"] },
+    gridClasses: { type: Array, default: ["grid", "grid-cols-5", "gap-4"] }
   }
 
   connect() {
-    const savedMode = Cookies.get("display_mode")
-    if (savedMode && (savedMode === "grid" || savedMode === "list")) {
-      this.modeValue = savedMode
+    const preferredMode = Cookies.get("display_mode")
+
+    if (preferredMode && (preferredMode === "grid" || preferredMode === "list")) {
+      this.modeValue = preferredMode
     }
 
-    this.updateUI()
-    this.toggleIcons()
+    this.refreshUI()
   }
 
   toggle(event) {
@@ -23,31 +25,24 @@ export default class extends Controller {
     this.modeValue = this.modeValue === "grid" ? "list" : "grid"
 
     Cookies.set("display_mode", this.modeValue, { expires: 365 })
-
-    this.updateUI()
-    this.toggleIcons()
   }
 
-  updateUI() {
+  modeValueChanged() {
+    this.refreshUI()
+  }
+
+  refreshUI() {
     if (this.modeValue === "grid") {
-      this.containerTarget.classList.remove("space-y-4")
-      this.containerTarget.classList.add("grid", "grid-cols-5", "gap-4")
+      this.containerTarget.classList.remove(...this.listClassesValue)
+      this.containerTarget.classList.add(...this.gridClassesValue)
     } else {
-      this.containerTarget.classList.remove("grid", "grid-cols-5", "gap-4")
-      this.containerTarget.classList.add("space-y-4")
+      this.containerTarget.classList.remove(...this.gridClassesValue)
+      this.containerTarget.classList.add(...this.listClassesValue)
     }
-  }
 
-  toggleIcons() {
-    const gridIcon = document.getElementById('grid-icon')
-    const listIcon = document.getElementById('list-icon')
-    const buttonText = document.getElementById('toggle-display-text')
+    this.listIconTarget.classList.toggle('hidden', this.modeValue !== 'grid')
+    this.gridIconTarget.classList.toggle('hidden', this.modeValue !== 'list')
 
-    gridIcon.classList.toggle('hidden', this.modeValue !== 'list')
-    listIcon.classList.toggle('hidden', this.modeValue !== 'grid')
-
-    buttonText.textContent = this.modeValue === 'grid'
-      ? 'Switch to List View'
-      : 'Switch to Grid View'
+    this.toggleDisplayTextTarget.textContent = `Switch to ${this.modeValue === "grid" ? "list" : "grid"} view`
   }
 }

@@ -1,11 +1,11 @@
 development:
   task_seeder:
-    class: TaskSeederJob
+    class: TaskProducerJob
     queue: default
     schedule: every 2 minutes
 
 production:
   task_seeder:
-    class: TaskSeederJob
+    class: TaskProducerJob
     queue: default
     schedule: every 2 minutes

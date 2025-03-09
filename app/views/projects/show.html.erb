@@ -1,6 +1,7 @@
 <%= turbo_stream_from @project %>
 
 <div data-controller="display-mode" data-display-mode-mode-value="<%= current_display_mode %>" class="w-full">
+
   <%= render "components/display_mode" %>
 
   <div class="container mx-auto px-4 py-8">
