@@ -1,4 +1,4 @@
-class TaskSeederJob < ApplicationJob
+class TaskProducerJob < ApplicationJob
   include Turbo::Broadcastable
   queue_as :default
 
