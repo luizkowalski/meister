@@ -1,6 +1,6 @@
 class ProjectsController < ApplicationController
   def index
-    @projects = Project.select("projects.*, COUNT(tasks.id) as task_count").left_joins(:tasks).group(:id)
+    @projects = Project.with_task_count.all
   end
 
   def show
