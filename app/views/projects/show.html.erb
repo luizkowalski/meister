@@ -23,7 +23,9 @@
 
         <div class="border-t border-gray-200 pt-4">
           <h3 class="text-lg font-medium text-gray-800 mb-4">Tasks</h3>
-          <div data-display-mode-target="container" class="transition-all duration-500" id="tasks--container">
+          <div data-display-mode-target="container"
+              class="<%= class_names({"grid grid-cols-5 gap-4" => display_grid?, "space-y-4" => display_list?}) %>"
+              id="tasks--container">
             <% @project.tasks.order(created_at: :desc).each do |task| %>
               <%= render "tasks/task", task: task %>
             <% end %>
